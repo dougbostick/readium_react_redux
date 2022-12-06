@@ -1,13 +1,20 @@
 import React, {useEffect} from "react";
-import { Navbar, StoriesList } from "./";
+import { Navbar, StoriesList, SingleStory, AllAuthors, SingleAuthor } from "./";
 import { fetchStoriesAsync } from "../features/stories/storiesSlice";
+import { fetchAuthorsAsync } from "../features/authors/authorsSlice";
 import { useDispatch } from "react-redux";
+import {Routes, Route} from 'react-router-dom';
+
 
 const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchStoriesAsync());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchAuthorsAsync());
   }, [dispatch]);
 
   return (
@@ -18,7 +25,13 @@ const App = () => {
         </div>
         <Navbar />
       </div>
-      <StoriesList />
+      <Routes>
+        <Route path='/stories' element={ <StoriesList />} />
+        <Route path='/stories/:storyId' element={ <SingleStory /> } />
+        <Route path='/authors' element={ <AllAuthors /> } />
+        <Route path='/authors/:authorId' element={ <SingleAuthor /> } />
+      </Routes>
+     
     </div>
   );
 };

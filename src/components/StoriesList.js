@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-
+import { Link } from 'react-router-dom';
 import { selectStories } from "../features/stories/storiesSlice";
 
 const StoriesList = () => {
@@ -12,12 +12,12 @@ const StoriesList = () => {
       {stories && stories.length
         ? stories.map((story) => (
             <div className="story" key={story.id}>
-              <a to={`/stories/${story.id}`}>
+              <Link to={`/stories/${story.id}`}>
                 <h3>{story.title}</h3>
-              </a>
-              <a to={`/authors/${story.author.id}`}>
+              </Link>
+              <Link to={`/authors/${story.author.id}`}>
                 <p>{story.author.name}</p>
-              </a>
+              </Link>
               <hr />
             </div>
           ))
